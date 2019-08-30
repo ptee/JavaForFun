@@ -1,8 +1,8 @@
-/** *************************************
- * @desc Chess board to store FEN chess string
+/** *****************************************************************************************
+ * Chess board to store chess's positions. It is used to convert between chess board position and FEN chess string
  * @author Pattreeya Tanisaro
  * 
- *************************************** */
+ ***************************************************************************************** */
 class Board
 {	 
 	private char[][] board;
