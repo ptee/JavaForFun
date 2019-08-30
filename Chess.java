@@ -12,7 +12,6 @@ class Board
 	{
 		
 		board = new char[N][N];
-		
 		fenStringToArray(fenString);
 	}
 	
