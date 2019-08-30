@@ -23,24 +23,24 @@ class Board
 	void fenStringToArray(String fenString)
 	{
 		
-        final String[] parts = fenString.split("\\s+");
-        final String[] rows = parts[0].split("/");
+    	final String[] parts = fenString.split("\\s+");
+		final String[] rows = parts[0].split("/");
         
         for (int i = N-1; i >= 0; i--) { // row
         	String row = rows[N-i-1];
         	int l=0; // counter of column
             for (int j = 0; j < row.length(); j++) { // column
-              final char c = row.charAt(j);
-              if (c >= '1' && c <= '8') {
-            	  int num_empty = c - '0';
-            	  for (int k = 0; k < num_empty; k++) 
-            		  board[i][l++] = 0;
+              	final char c = row.charAt(j);
+              	if (c >= '1' && c <= '8') {
+            	  	int num_empty = c - '0';
+            	  	for (int k = 0; k < num_empty; k++) 
+            		  	board[i][l++] = 0;
               	}
-              else { 
-            	  board[i][l++] = c;
-              }
+              	else { 
+            	  	board[i][l++] = c;
+              	}
             }
-          }
+         }
 	}
 	
 	/**
@@ -144,7 +144,7 @@ class Board
     	int fromC = columnIdx(fromPos[0]); int fromR = rowIdx( fromPos[1] );
     	int toC = columnIdx(toPos[0]);     int toR = rowIdx( toPos[1] );
     	
-    	// in order to be able to move successfully, we check simple the following conditions
+    	// in order to be able to move successfully, we check simply the following conditions:
     	// 1. fromPos contain element
     	// 2. ....
     	char fromVal = board[fromR][fromC];
@@ -176,7 +176,7 @@ public class Chess
 	 *  - a string contains 8 groups splitting by slash
 	 *  - each group contains 8 char
 	 * @param fenString
-	 * @return
+	 * @return true if the given string is a valid FEN's string.
 	 */
 	static boolean validFenString(String fenString) 
 	{
@@ -210,6 +210,8 @@ public class Chess
 		return true;
 	}
 	
+	/** Test the functionalities..
+	*/
 	public static void main (String[] args) 
 	{
 		boolean ok;
