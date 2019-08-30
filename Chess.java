@@ -10,7 +10,6 @@ class Board
 		
 	Board( String fenString )
 	{
-		
 		board = new char[N][N];
 		fenStringToArray(fenString);
 	}
