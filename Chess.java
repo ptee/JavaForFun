@@ -1,5 +1,6 @@
 /** *************************************
- * Chess board to store FEN chess string
+ * @desc Chess board to store FEN chess string
+ * @author Pattreeya Tanisaro
  * 
  *************************************** */
 class Board
