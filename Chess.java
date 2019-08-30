@@ -1,5 +1,7 @@
 /** *****************************************************************************************
- * Chess board to store chess's positions. It is used to convert between chess board position and FEN chess string
+ * Chess board to store chess's positions. 
+ *
+ * @desc It is used to convert between chess board positions and a FEN chess string.
  * @author Pattreeya Tanisaro
  * 
  ***************************************************************************************** */
