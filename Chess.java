@@ -24,24 +24,24 @@ class Board
 	void fenStringToArray(String fenString)
 	{
 		
-    	final String[] parts = fenString.split("\\s+");
+    		final String[] parts = fenString.split("\\s+");
 		final String[] rows = parts[0].split("/");
         
-        for (int i = N-1; i >= 0; i--) { // row
-        	String row = rows[N-i-1];
-        	int l=0; // counter of column
-            for (int j = 0; j < row.length(); j++) { // column
-            	final char c = row.charAt(j);
-              	if (c >= '1' && c <= '8') {
-            	  	int num_empty = c - '0';
-            	  	for (int k = 0; k < num_empty; k++) 
-            		  	board[i][l++] = 0;
-              	}
-              	else { 
-            	  	board[i][l++] = c;
-              	}
-            }
-         }
+        	for (int i = N-1; i >= 0; i--) { // row
+        		String row = rows[N-i-1];
+        		int l=0; // counter of column
+            		for (int j = 0; j < row.length(); j++) { // column
+            			final char c = row.charAt(j);
+              			if (c >= '1' && c <= '8') {
+            	  			int num_empty = c - '0';
+            	  			for (int k = 0; k < num_empty; k++) 
+            		  			board[i][l++] = 0;
+              			}
+              			else { 
+            	  			board[i][l++] = c;
+              			}
+            		}
+         	}
 	}
 	
 
@@ -78,96 +78,95 @@ class Board
 	/**
 	 * Display the chess board 
 	 */
-    void displayBoard()
-    {
+    	void displayBoard()
+    	{
 
-    	for(int i=N-1; i>=0; i--) {
-    		String msg="";
-    		for(int j=0; j<N; j++) {
-    			if (board[i][j] == 0) {
-    				msg +='.';    		
+    		for(int i=N-1; i>=0; i--) {
+    			String msg="";
+    			for(int j=0; j<N; j++) {
+    				if (board[i][j] == 0) {
+    					msg +='.';    		
+    				}	
+    				else {
+    					msg += board[i][j];
+    				}
     			}
-    			else {
-    				msg += board[i][j];
-    			}
+    			System.out.println(msg+"\n");
     		}
-    		System.out.println(msg+"\n");
+    	}	
+    
+
+    	/**
+     	* Display FEN String
+     	*/
+    	void displayFenString(String fenString) 
+    	{
+    		System.out.println( fenString );	
+    	}	
+    
+
+   	/**
+     	* Validate the given position in "a..h" and "1..8"
+     	* @param pos as char[]
+     	* @return false if the given position is invalid.
+     	*/
+    	boolean validPos( char[] Pos) 
+    	{
+    		boolean ok = true;
+    		char col=Pos[0]; char row=Pos[1];
+    		ok = ok && ("abcdefgh".indexOf(col) != -1);
+    		ok = ok && ("12345678".indexOf(row) != -1);
+    	
+    		return ok;
     	}
-    }
     
 
-    /**
-     * Display FEN String
-     */
-    void displayFenString(String fenString) 
-    {
-    	System.out.println( fenString );	
-    }
-    
-
-    /**
-     * Validate the given position in "a..h" and "1..8"
-     * @param pos as char[]
-     * @return false if the given position is invalid.
-     */
-    boolean validPos( char[] Pos) 
-    {
-    	boolean ok = true;
-    	char col=Pos[0]; char row=Pos[1];
-    	ok = ok && ("abcdefgh".indexOf(col) != -1);
-    	ok = ok && ("12345678".indexOf(row) != -1);
-    	
-    	return ok;
-    }
-    
-
-    int columnIdx(char c) 
-    {
-    	return "abcdefgh".indexOf( c );	
-    }
-    
-
-    int rowIdx(char r)
-    {
-    	return "12345678".indexOf( r );
-    }
-    
-    
-    /**    
-     * Move element from current position to new position
-     * @return true if the moving to new position is successful, false otherwise.
-     */
-    boolean move(String _fromPos, String _toPos)
-    {
-    	
-    	char[] fromPos = _fromPos.toCharArray();
-    	char[] toPos = _toPos.toCharArray();
-    	if ( !validPos( fromPos)  || !validPos(toPos) ) {
-    		System.out.println("Error: Invalid position!");
-    		return false;
+    	int columnIdx(char c) 
+    	{
+    		return "abcdefgh".indexOf( c );	
     	}
-    	
-    	// Columns = a...h and Rows = 1...8 
-    	int fromC = columnIdx(fromPos[0]); int fromR = rowIdx( fromPos[1] );
-    	int toC = columnIdx(toPos[0]);     int toR = rowIdx( toPos[1] );
-    	
-    	// in order to be able to move successfully, we check simply the following conditions:
-    	// 1. fromPos contain element
-    	// 2. ....
-    	char fromVal = board[fromR][fromC];
-    	char toVal = board[toR][toC];
-    	// if both positions make sense, we update the board position and return true.
-    	if( (fromVal != 0)  ) {
-    		board[fromR][fromC] = 0;
-    		board[toR][toC] = fromVal;
-    		System.out.println("Moving "+ fromVal+ " at "+_fromPos +" to "+_toPos+".");
-    		return true;
+    
+
+    	int rowIdx(char r)
+    	{
+    		return "12345678".indexOf( r );
     	}
-    	System.out.println("Error: Cannot move to new position!");
-        return false;
+    
+    
+    	/**    
+     	* Move element from current position to new position
+     	* @return true if the moving to new position is successful, false otherwise.
+     	*/
+    	boolean move(String _fromPos, String _toPos)
+    	{
     	
+    		char[] fromPos = _fromPos.toCharArray();
+    		char[] toPos = _toPos.toCharArray();
+    		if ( !validPos( fromPos)  || !validPos(toPos) ) {
+    			System.out.println("Error: Invalid position!");
+    			return false;
+    		}
     	
-    }
+    		// Columns = a...h and Rows = 1...8 
+    		int fromC = columnIdx(fromPos[0]); int fromR = rowIdx( fromPos[1] );
+    		int toC = columnIdx(toPos[0]);     int toR = rowIdx( toPos[1] );
+    	
+    		// in order to be able to move successfully, we check simply the following conditions:
+    		// 1. fromPos contain element
+    		// 2. ....
+    		char fromVal = board[fromR][fromC];
+    		char toVal = board[toR][toC];
+    		// if both positions make sense, we update the board position and return true.
+    		if( (fromVal != 0)  ) {
+    			board[fromR][fromC] = 0;
+    			board[toR][toC] = fromVal;
+    			System.out.println("Moving "+ fromVal+ " at "+_fromPos +" to "+_toPos+".");
+    			return true;
+    		}
+    		System.out.println("Error: Cannot move to new position!");
+        	return false;
+    	
+    	}
          
 } // **************** end Board class  *******************
 
@@ -189,31 +188,31 @@ public class Chess
 	{
 		final int N = 8;
 		final String[] parts = fenString.split("\\s+");
-        final String[] rows = parts[0].split("/");
+        	final String[] rows = parts[0].split("/");
      
-        for (int i= 0; i <N; i++) { // row
-        	char[] row = rows[i].toCharArray();
-        	// check whether each char is valid
-        	// check whether in each row has the sum of 8
-        	int sum=0;
-        	for (int j=0; j<row.length; j++) {
-        		int idx ="rqkbnpRQKBNP12345678".indexOf( row[j] );
-        		if ( idx == -1 ) {
-        			System.out.println("Error: at row: "+(i+1)+ ", " +rows[i]+" invalid string!");
+        	for (int i= 0; i <N; i++) { // row
+        		char[] row = rows[i].toCharArray();
+        		// check whether each char is valid
+        		// check whether in each row has the sum of 8
+        		int sum=0;
+        		for (int j=0; j<row.length; j++) {
+        			int idx ="rqkbnpRQKBNP12345678".indexOf( row[j] );
+        			if ( idx == -1 ) {
+        				System.out.println("Error: at row: "+(i+1)+ ", " +rows[i]+" invalid string!");
+        				return false;
+        			}
+        			if ( Character.isDigit(row[j])  ) {
+        				sum += Character.getNumericValue( row[j] );
+        			}
+        			else {
+        				sum += 1;
+        			}
+        		}
+        		if (sum != N) {
+        			System.out.println("Error: at row [ "+ (i+1) +"] of "+rows[i]);
         			return false;
         		}
-        		if ( Character.isDigit(row[j])  ) {
-        			sum += Character.getNumericValue( row[j] );
-        		}
-        		else {
-        			sum += 1;
-        		}
         	}
-        	if (sum != N) {
-        		System.out.println("Error: at row [ "+ (i+1) +"] of "+rows[i]);
-        		return false;
-        	}
-        }
 		return true;
 	}
 	
