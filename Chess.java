@@ -16,6 +16,7 @@ class Board
 		fenStringToArray(fenString);
 	}
 	
+
 	/**
 	 * Convert fenString to board pattern.
 	 * @param fenString
@@ -30,7 +31,7 @@ class Board
         	String row = rows[N-i-1];
         	int l=0; // counter of column
             for (int j = 0; j < row.length(); j++) { // column
-              	final char c = row.charAt(j);
+            	final char c = row.charAt(j);
               	if (c >= '1' && c <= '8') {
             	  	int num_empty = c - '0';
             	  	for (int k = 0; k < num_empty; k++) 
@@ -43,6 +44,7 @@ class Board
          }
 	}
 	
+
 	/**
 	 * Convert board position to fenString
 	 */
@@ -72,6 +74,7 @@ class Board
 		return fenString;
 	}
     
+
 	/**
 	 * Display the chess board 
 	 */
@@ -92,6 +95,7 @@ class Board
     	}
     }
     
+
     /**
      * Display FEN String
      */
@@ -100,6 +104,7 @@ class Board
     	System.out.println( fenString );	
     }
     
+
     /**
      * Validate the given position in "a..h" and "1..8"
      * @param pos as char[]
@@ -115,11 +120,13 @@ class Board
     	return ok;
     }
     
+
     int columnIdx(char c) 
     {
     	return "abcdefgh".indexOf( c );	
     }
     
+
     int rowIdx(char r)
     {
     	return "12345678".indexOf( r );
@@ -210,8 +217,10 @@ public class Chess
 		return true;
 	}
 	
-	/** Test the functionalities..
-	*/
+
+	/** 
+	 * Test the functionalities..
+	 */	
 	public static void main (String[] args) 
 	{
 		boolean ok;
